@@ -2,10 +2,7 @@
 # exit on error
 set -o errexit
 
-cd penv
 poetry install
-
-cd ..
 
 python manage.py collectstatic --no-input
 python manage.py migrate
