@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+
+
+# Env
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +27,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = 'RENDER' not in os.environ
-DEBUG = os.environ.get('DEBUG') == 'TRUE'
-#DEBUG = env.bool('DEBUG', default=False)
+DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = []
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
@@ -94,7 +99,7 @@ else:
     DATABASES = {
         'default': dj_database_url.config(
             # Feel free to alter this value to suit your needs.
-            default='postgresql://postgres:postgres@localhost:5432/mysite',
+            default=env('EXTERMAL_URL_DATABASE'),
             conn_max_age=600
         )
     }
