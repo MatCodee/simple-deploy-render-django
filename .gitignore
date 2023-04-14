@@ -81,3 +81,7 @@ venv.bak/
 # mkdocs documentation
 /site
 
+
+
+
+staticfiles
